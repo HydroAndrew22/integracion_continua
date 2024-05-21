@@ -82,11 +82,9 @@ INSERT INTO tab_empleados (nombre, apellido, email, id_especialidad, sede) VALUE
 
 -- VISTAS
 
-create view vw_agendar_cita as SELECT ac.id_ac, ac.id_usuario, ac.id_tipo_cita, ac.fecha_cita, ac. estado_cita, em.id_profesional, 
-CONCAT(em.nombre,' ', em.apellido) as nombre_profesional, em.id_especialidad, em.sede, tp.tipo 
-FROM tab_agendar_cita ac 
-LEFT join tab_empleados em on em.id_profesional = ac.id_profesional 
-LEFT join tab_tipo_cita tp on tp.id_tipo_cita = ac.id_tipo_cita
-WHERE ac.estado_cita='PENDIENTE' ;
+create view vw_consultar_empleados as SELECT CONCAT(em.nombre,' ', em.apellido) as nombre_profesional, em.email, es.tipo, em.sede, em.fecha_creacion::date as fecha_creacion
+FROM tab_empleados em
+LEFT join tab_especialidades es on em.id_profesional = es.id_especialidad 
+where em.esactivo = true  
 
 
