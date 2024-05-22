@@ -9,7 +9,7 @@ try:
         password=DB_PASSWORD, host=DB_HOST, port=DB_PORT
     )
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM vw_consultar_empleados")
+    cursor.execute("SELECT * FROM holi")
     rows = cursor.fetchall()
     for row in rows:
         print(row)

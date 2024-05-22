@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:14.12
+    restart: always
+    container_name: bd-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: root
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
+
+  python-consulta:
+    image: imageName
+    ports:
+      - 8888:8888
+    volumes:
+      - .:/home/app
+    links:
+      -postgres
